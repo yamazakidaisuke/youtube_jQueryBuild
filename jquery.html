@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQuery-DEMO-</title>
+</head>
+<body>
+<h1 id="view">DEMO1</h1>
+
+<script>
+//コンストラクタ
+const $ = function( id ) {
+    return new $.prototype.init( id );
+};
+$.prototype.init = function(id){
+    this.id = document.querySelector(id);
+    this.style=[];
+    return this;
+};
+//html
+$.prototype.html = function(s){
+    this.id.innerHTML=s;
+    return this;
+};
+//css
+$.prototype.css = function(prop,value){
+    this.style.push(prop+":"+value);
+    this.id.setAttribute("style", this.style.join(";") );
+    return this;
+};
+//fadeOut
+$.prototype.fadeOut = function(n){
+    const id    = this.id;
+    const style = this.style;
+    let i=1;
+    let sid = setInterval(function(){
+        id.setAttribute("style", "opacity:"+(i-=0.1)+";"+style.join(";"));
+        if(i<=0){
+            clearInterval(sid);
+        }
+    },n/10);
+    return this;
+};
+$.prototype.init.prototype = $.prototype;
+
+//メイン処理！！
+try {
+    $("#view").html("作った！").css("color","#ff0000").css("background","#000").fadeOut(2000);
+} catch (error) {
+    console.error(error);
+}
+</script>
+</body>
+</html>
